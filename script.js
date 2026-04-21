@@ -1,11 +1,18 @@
 const params = new URLSearchParams(window.location.search);
-const loc = params.get("loc") || "test";
+
+const partner = params.get("partner") || "";
+const loc = params.get("loc") || "";
+
+const base =
+  "https://forms.zohopublic.com/aldobettoni/form/MultiLocationFormTEST/formperma/FzWNb1lmOhqpaKpZGn35vKY4Xk-iFLnUczhBIjXRHTU";
 
 const iframe = document.createElement("iframe");
+
 iframe.src =
-  "https://forms.zohopublic.com/aldobettoni/form/MultiLocationFormTEST/formperma/FzWNb1lmOhqpaKpZGn35vKY4Xk-iFLnUczhBIjXRHTU"
-  + `?location_id=${loc}`;
+  base +
+  "?partner=" + encodeURIComponent(partner) +
+  "&location_id=" + encodeURIComponent(loc);
 
 iframe.style = "height:500px;width:99%;border:none;";
 
-document.body.appendChild(iframe);
+document.getElementById("form-container").appendChild(iframe);
