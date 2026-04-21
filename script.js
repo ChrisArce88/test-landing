@@ -1,24 +1,22 @@
-const params = new URLSearchParams(window.location.search);
+// Esperamos a que el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Obtenemos la cadena de parámetros de la URL actual
+    const params = new URLSearchParams(window.location.search);
 
-const loc = params.get("location");
-const partner = params.get("partner");
+    // 2. Extraemos los valores específicos
+    const partnerValue = params.get('partner');
+    const locationValue = params.get('location');
 
-// 1. validación obligatoria
-if (!loc || !partner) {
-  document.body.innerHTML = "Missing parameters";
-  throw new Error("Missing partner or location");
-}
+    // 3. Referenciamos los inputs del formulario
+    const partnerInput = document.getElementById('partner');
+    const locationInput = document.getElementById('location');
 
-// 2. construir URL segura
-const formBase =
-  "https://forms.zohopublic.com/aldobettoni/form/MultiLocationFormTEST/formperma/FzWNb1lmOhqpaKpZGn35vKY4Xk-iFLnUczhBIjXRHTU";
+    // 4. Asignamos los valores si existen en la URL
+    if (partnerValue && partnerInput) {
+        partnerInput.value = partnerValue;
+    }
 
-const url =
-  formBase +
-  "?Partner=" + encodeURIComponent(partner) +
-  "&Location_ID=" + encodeURIComponent(loc);
-
-// 3. delay mínimo para estabilidad móvil
-setTimeout(() => {
-  window.location.replace(url);
-}, 150);
+    if (locationValue && locationInput) {
+        locationInput.value = locationValue;
+    }
+});
