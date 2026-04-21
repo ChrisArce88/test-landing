@@ -1,22 +1,26 @@
-// Esperamos a que el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Obtenemos la cadena de parámetros de la URL actual
+    // 1. Capturar los parámetros de la URL de la landing
     const params = new URLSearchParams(window.location.search);
+    const partner = params.get('partner') || '';
+    const locationParam = params.get('location') || '';
 
-    // 2. Extraemos los valores específicos
-    const partnerValue = params.get('partner');
-    const locationValue = params.get('location');
-
-    // 3. Referenciamos los inputs del formulario
-    const partnerInput = document.getElementById('partner');
-    const locationInput = document.getElementById('location');
-
-    // 4. Asignamos los valores si existen en la URL
-    if (partnerValue && partnerInput) {
-        partnerInput.value = partnerValue;
+    // 2. Mostrar feedback visual (opcional)
+    const output = document.getElementById('output');
+    if (partner || locationParam) {
+        output.textContent = `Detectado: Partner ${partner} en Locación ${locationParam}`;
     }
 
-    if (locationValue && locationInput) {
-        locationInput.value = locationValue;
-    }
+    // 3. Construir la URL de Zoho con los parámetros
+    // El formato debe ser: URL_DEL_FORM?AliasCampo1=Valor1&AliasCampo2=Valor2
+    const baseFormUrl = 'https://forms.zohopublic.com/aldobettoni/form/MultiLocationFormTEST/formperma/FzWNb1lmOhqpaKpZGn35vKY4Xk-iFLnUczhBIjXRHTU';
+    const finalUrl = `${baseFormUrl}?partner=${encodeURIComponent(partner)}&location=${encodeURIComponent(locationParam)}`;
+
+    // 4. Crear e inyectar el iframe dinámicamente
+    const iframe = document.createElement('iframe');
+    iframe.setAttribute('src', finalUrl);
+    iframe.setAttribute('style', 'height:500px;width:99%;border:none;');
+    iframe.setAttribute('frameborder', '0');
+    iframe.setAttribute('aria-label', 'Multi Location Form TEST');
+
+    document.getElementById('form-container').appendChild(iframe);
 });
