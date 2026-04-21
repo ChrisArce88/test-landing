@@ -1,14 +1,19 @@
-console.log("FULL URL:", window.location.href);
-
 const params = new URLSearchParams(window.location.search);
 
-console.log("SEARCH STRING:", window.location.search);
+const loc = params.get("loc") || "";
+const partner = params.get("partner") || "";
 
-const loc = params.get("loc");
-const partner = params.get("partner");
+const formBase =
+  "https://forms.zohopublic.com/aldobettoni/form/MultiLocationFormTEST/formperma/FzWNb1lmOhqpaKpZGn35vKY4Xk-iFLnUczhBIjXRHTU";
 
-document.body.innerHTML = `
-  <h1>DEBUG</h1>
-  <p>loc: ${loc}</p>
-  <p>partner: ${partner}</p>
-`;
+const iframe = document.createElement("iframe");
+
+iframe.src =
+  formBase +
+  "?partner=" + encodeURIComponent(partner) +
+  "&location_id=" + encodeURIComponent(loc);
+
+iframe.style = "height:500px;width:99%;border:none;";
+
+document.getElementById("form-container").innerHTML = "";
+document.getElementById("form-container").appendChild(iframe);
