@@ -11,7 +11,7 @@ const iframe = document.createElement("iframe");
 iframe.src =
   formBase +
   "?partner=" + encodeURIComponent(partner) +
-  "&location_id=" + encodeURIComponent(loc);
+  "&location_id=" + encodeURIComponent(location);
 
 iframe.style = "height:500px;width:99%;border:none;";
 
