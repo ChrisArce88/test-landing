@@ -1,0 +1,292 @@
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/Gilroy-Regular.woff2') format('woff2');
+  font-weight: 400;
+}
+
+body {
+  margin: 0;
+  font-family: 'Gilroy', Arial, sans-serif;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("https://championcashloans.com/wp-content/uploads/2026/04/bghuichoweb_.png");
+  background-size: cover;
+  background-position: center;
+  transform: rotate(180deg) scale(1.2);
+  z-index: -1;
+  filter: blur(0.5px) brightness(0.95);
+  opacity: 0.9;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: linear-gradient(#fcdb37, #f1b416);
+  font-weight: 700;
+  font-size: 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  color:#1a1a1a;
+  position: sticky;
+  top: 0;                   /* Stick to the very top */
+  z-index: 1000; 
+}
+
+.logo img{
+  font-weight: bold;
+  font-size: 18px;
+  max-width: 110px;
+  font-display: block;
+}
+
+.call-btn {
+  background: #7ac621;
+  padding: 10px 18px;
+  border-radius: 24px;
+}
+
+#btnlink:hover {
+  background: #98f42d;
+  color:#1a1a1a;
+}
+
+.call-btn::before {
+  content:"✆ ";
+  font-size: 22px;
+}
+
+.nav-links a {
+  margin-left: 20px;
+  text-decoration: none;
+  color:#1a1a1a;
+}
+
+.nav-links a:hover{
+  color:#eb8500;
+}
+
+/* HERO */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  min-height: 80vh;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.hero-left,
+.hero-right {
+  height: auto; /* Cambia de 100% a auto */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra el contenido internamente */
+}
+
+.maintitle {
+  text-align: center;
+  padding: 15px 30px 0px 30px;
+  margin: 15px 0;
+  line-height: 1;
+  display: block;
+}
+
+h1 {
+  font-size: 48px;
+  text-align: center;
+  line-height: 1;
+	padding:0;
+	margin: 0px 0 5px 0;
+	color:#085127;
+}
+
+h3 {
+  font-size: 22px;
+	text-align: center;
+	line-height: 1;
+	padding:10px;
+	margin: 0 0 0px 0;
+	color:#085127;
+}
+
+p {
+  font-size: 14px;
+	text-align: center;
+	line-height: 1;
+	padding:0;
+	margin: 0 0 10px 0;
+}
+
+.disclaimer{
+	color:#535353;
+	font-size: 12px;
+}
+
+/* LEFT SIDE */
+.hero-left {
+  flex: 1;
+  background: url('https://images.unsplash.com/photo-1605902711622-cfb43c4437d5') center/cover;
+  color: white;
+  padding: 0px 0px 60px 60px;
+  margin:0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: auto;
+}
+
+.hero-left img {
+  max-width: 90%;
+  max-height: 65%;
+  padding-bottom: 0px;
+}
+
+/* RIGHT SIDE */
+.hero-right {
+  flex: 1;
+  background: transparent;
+  padding: 0px 60px 0px 10px;
+  margin-top: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+#output{
+	text-align: center;
+	line-height: 1;
+	color:white;
+}
+
+/* FORM */
+iframe {
+  width: 100%;
+  height: 420px;
+  width: 100%;
+  flex: none;
+  overflow: hidden;
+  border-radius: 12px;
+  border: none;
+  display: block;
+  margin: 0;  
+  padding: 0;
+  vertical-align: bottom;
+}
+
+.form-card {
+  position: relative; 
+  height: 460px;
+  background: #085127;
+  border-radius: 16px;
+  padding: 0;
+  line-height: 0;
+  border: 8px solid #edae14;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  overflow: hidden;
+  align-items: flex-start;
+}
+
+/* PORTADA */
+.form-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; 
+  background: #014502;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  text-align: center;
+  padding: 30px;
+  transition: opacity 0.4s ease;
+  overflow: hidden;
+  font-family: 'Gilroy', Arial, sans-serif;
+}
+
+.form-cover h2 {
+  font-family: 'Gilroy', Arial, sans-serif;
+  color: #f3b616;
+  font-size: 34px;
+  line-height: 1.2;
+  margin: 10px 0 15px 0;
+  font-weight: 900 !important;
+}
+
+.form-cover h4 {
+  font-family: 'Gilroy', Arial, sans-serif;
+  color: #f3b616;
+  font-weight: 700;
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.form-cover h3 {
+  font-size: 26px;
+  margin-bottom: 30px;
+  color: #f3b616;
+}
+
+.form-cover button {
+  background: #7ac621;
+  color: #1a1a1a;
+  padding: 10px 18px;
+  border-radius: 24px;
+  border: none;
+  padding: 16px 40px;   
+  font-size: 18px;
+  cursor: pointer;
+  font-weight: 700;
+  width: 80%;           
+  max-width: 320px;     
+  margin: 25px 0;
+  font-family: 'Gilroy', Arial, sans-serif;
+}
+
+.form-cover button:hover{
+  background: #98f42d;
+  color:#1a1a1a;
+}
+
+.end{
+  clear: both;
+  padding: 40px 20px; /* Más espacio para que el disclaimer respire */
+  margin: 0 auto;
+  max-width: 800px;
+  position: relative;
+}
+
+
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-left,
+  .hero-right {
+    padding: 20px;
+  }
+
+  .form-card {
+    margin-left: 0;
+  }
+
+  iframe {
+    max-height: none;
+  }
+
+  .end {
+    margin: 20px 0;
+    padding: 10px;
+  }
+}
