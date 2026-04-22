@@ -1,4 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
+	
+	 const btn = document.querySelector(".form-cover button");
+
+  btn.addEventListener("click", () => {
+    const cover = document.querySelector(".form-cover");
+    cover.style.opacity = "0";
+    cover.style.pointerEvents = "none";
+  });
+	
     // 1. Capturar los parámetros de la URL de la landing
     const params = new URLSearchParams(window.location.search);
     const partner = params.get('partner') || '';
@@ -23,4 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
     iframe.setAttribute('aria-label', 'Multi Location Form TEST');
 
     document.getElementById('form-container').appendChild(iframe);
+	document.getElementById("lottieAnim").play();
+	
 });
+
+
