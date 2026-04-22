@@ -259,7 +259,7 @@ iframe {
 }
 
 .form-cover lottie-player {
-  filter: hue-rotate(-30deg) saturate(1.2) brightness(1.1);
+  filter: grayscale(100%);
 }
 
 .end{
