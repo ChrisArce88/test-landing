@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 	
 	 const btn = document.querySelector(".form-cover button");
+   const btn = document.getElementById("startFormBtn");
 
   btn.addEventListener("click", () => {
     const cover = document.querySelector(".form-cover");
@@ -32,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
     iframe.setAttribute('aria-label', 'Multi Location Form TEST');
 
     document.getElementById('form-container').appendChild(iframe);
-	document.getElementById("lottieAnim").play();
 	
 });
 
