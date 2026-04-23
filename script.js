@@ -1,11 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
    const btn = document.getElementById("startFormBtn");
 
-  btn.addEventListener("click", () => {
-    const cover = document.querySelector(".form-cover");
-    cover.style.opacity = "0";
-    cover.style.pointerEvents = "none";
-  });
+btn.addEventListener("click", () => {
+  const cover = document.querySelector(".form-cover");
+  cover.style.opacity = "0";
+  cover.style.pointerEvents = "none";
+
+  loadForm();
+});
 	
     // 1. Capturar los parámetros de la URL de la landing
     const params = new URLSearchParams(window.location.search);
