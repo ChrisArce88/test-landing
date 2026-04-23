@@ -1,8 +1,23 @@
 
+@font-face {
+  font-family: "Gilroy";
+  src: url("/fonts/Gilroy.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden; 
+  position: relative;
+}
 
 body {
   margin: 0;
   font-family: 'Gilroy', Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; /* Esto ayuda a empujar el footer al final */
 }
 
 body::before {
@@ -13,9 +28,18 @@ body::before {
   background-size: cover;
   background-position: center;
   transform: rotate(180deg) scale(1.2);
-  z-index: -1;
+  z-index: -2; /* Bajamos un nivel más */
   filter: blur(0.5px) brightness(0.95);
   opacity: 0.9;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(236,236,236,0.8));
+  z-index: -1;
+  pointer-events: none;
 }
 
 /* NAVBAR */
@@ -32,6 +56,7 @@ body::before {
   position: sticky;
   top: 0;                   /* Stick to the very top */
   z-index: 1000; 
+  font-family: 'Gilroy', Arial, sans-serif;
 }
 
 .logo img{
@@ -103,6 +128,7 @@ h1 {
 	padding:0px;
 	margin: 0px 10px 20px 10px;
 	color:#085127;
+  font-family: 'Gilroy', Arial, sans-serif;
 }
 
 h3 {
@@ -112,6 +138,7 @@ h3 {
 	padding:10px;
 	margin: 0 0 0px 0;
 	color:#085127;
+  font-family: 'Gilroy', Arial, sans-serif;
 }
 
 p {
@@ -258,28 +285,46 @@ iframe {
 }
 
 .end{
-  padding: 20px;
+    position: relative;
+    padding: 20px;
     text-align: center;
     max-width: 700px;
     margin: 0 auto 40px auto; /* Reducimos margen superior */
+    top:-15px;
+    background: transparent; /* Vital para que se vea el fondo del body */
+    box-sizing: border-box;
 }
 
+
+
+.end .disclaimer {
+  color: #535353;
+  font-size: 11px;
+  line-height: 1.1; 
+  opacity: 0.8;
+}
 
 
 
 @media (max-width: 768px) {
  .hero {
+    display: block; /* Mejor que flex para evitar empujes horizontales */
+    width: 100%;
+    overflow: hidden;
     display: flex; /* Cambiamos grid por flex para mejor control vertical */
     flex-direction: column;
     grid-template-columns: 1fr; /* Reset del grid */
     min-height: auto;
-    padding: 10px;
+    padding: 0px;
   }
 
   .hero-right {
-    padding: 0 !important; /* Quitamos paddings laterales que empujan la card */
-    margin: 0 auto !important;
+
     width: 100% !important;
+    padding: 20px !important; /* Eliminamos cualquier padding que empuje la card */
+    margin: 0 !important;
+    display: flex;
+    justify-content: center;
     display: flex !important;
     justify-content: center; /* Centra la card horizontalmente */
     box-sizing: border-box;
@@ -303,9 +348,11 @@ iframe {
 
 .form-card {
 
-  width: 90% !important;   /* Le damos un ancho del 90% para que no toque los bordes del cel */
-    max-width: 560px;         /* Limite para que no se vea gigante en pantallas plus */
-    margin: 20px auto !important; /* Centrado automático */
+    width: calc(100% - 40px) !important;
+    max-width: 560px;
+    margin: 20px auto !important;
+    box-sizing: border-box; /* Vital: incluye el borde de 8px en el ancho total */
+    flex-shrink: 0; /* Evita que el flexbox la aplaste */
     left: 0;                  /* Aseguramos que no tenga desfase lateral */
     right: 0;
     display: block !important; 
@@ -349,8 +396,8 @@ iframe {
   }
 
   .end {
-    margin: 0px 0;
-    padding: 0px 80px;
+    padding: 20px 15px;
+    margin-top: -10px; /* Lo acercamos un poco más al hero si hay mucho espacio */
   }
 
   .logo {
@@ -366,11 +413,5 @@ iframe {
     margin: 0 10px;
     font-size: 18px;
   }
-}
 
-@font-face {
-  font-family: "Gilroy";
-  src: url("/fonts/Gilroy.woff2") format("woff2");
-  font-weight: 400;
-  font-display: swap;
-}
+
