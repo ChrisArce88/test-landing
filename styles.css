@@ -265,30 +265,58 @@ iframe {
 }
 
 
+
+
 @media (max-width: 768px) {
-  .hero {
-    grid-template-columns: 1fr;
+ .hero {
+    display: flex; /* Cambiamos grid por flex para mejor control vertical */
+    flex-direction: column;
+    grid-template-columns: 1fr; /* Reset del grid */
     min-height: auto;
+    padding: 0;
   }
 
   .hero-right {
         padding: 10px 20px; /* Espacio para respirar en los lados */
     }
 
-  .hero-left, {
-    padding: 20px;
+  .hero-left {
+    padding: 20px !important; /* Forzamos el reset del padding lateral */
+    margin: 0;
+    width: 100%;
+    align-items: center;
+    text-align: center;
   }
 
   .hero-left img {
-        max-width: 100px;
+        max-width: 80%; /* Logo más manejable en móvil */
         height: auto; /* Evita que se estire */
         object-fit: contain;
     }
 
   .form-card {
-    height: auto;
-    margin: 20px auto;
-    width: 95%; /* Que no toque los bordes físicos del cel */
+    height: 500px; /* IMPORTANTE: Altura fija para que el cover NO sea una línea */
+    width: 100%;
+    margin: 0 auto;
+    display: block; /* Asegura el comportamiento de bloque */
+  }
+
+  .form-cover {
+    padding: 15px;
+  }
+
+  .form-cover h2 {
+    font-size: 26px; /* Texto más pequeño para pantallas chicas */
+  }
+
+  .form-cover button {
+    width: 90%;
+    padding: 14px 20px;
+  }
+
+  h1 {
+    font-size: 32px; /* Título principal más pequeño */
+    padding: 10px;
   }
 
   iframe {
@@ -306,7 +334,7 @@ iframe {
 
   .navbar {
     justify-content: center;
-    padding: 15px 20px;
+    padding: 20px;
   }
 
   .nav-links a {
