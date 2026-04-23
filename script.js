@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         iframe.style.border = "none";
         // HACK: Subimos el iframe para compensar el margen de Zoho
         iframe.style.marginTop = "-45px"; 
+        iframe.style.height = window.innerWidth < 768 ? "550px" : "520px";
         
         iframe.setAttribute('aria-label', 'Multi Location Form TEST');
         container.appendChild(iframe);
