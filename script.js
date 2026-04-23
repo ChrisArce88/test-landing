@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-	
-	 const btn = document.querySelector(".form-cover button");
    const btn = document.getElementById("startFormBtn");
 
   btn.addEventListener("click", () => {
