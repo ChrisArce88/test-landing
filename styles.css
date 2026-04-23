@@ -277,9 +277,11 @@ iframe {
   }
 
   .hero-right {
-    display: block !important; /* Cambiamos de flex a block para evitar colapsos */
+    padding: 0 !important; /* Quitamos paddings laterales que empujan la card */
+    margin: 0 auto !important;
     width: 100% !important;
-    padding: 40px !important;
+    display: flex !important;
+    justify-content: center; /* Centra la card horizontalmente */
     box-sizing: border-box;
   }
 
@@ -292,7 +294,7 @@ iframe {
   }
 
   .hero-left img {
-        max-width: 60%; /* Logo más manejable en móvil */
+        max-width: 85%; /* Logo más manejable en móvil */
         height: auto; /* Evita que se estire */
         object-fit: contain;
         padding:0;
@@ -300,15 +302,24 @@ iframe {
     }
 
 .form-card {
+
+  width: 90% !important;   /* Le damos un ancho del 90% para que no toque los bordes del cel */
+    max-width: 560px;         /* Limite para que no se vea gigante en pantallas plus */
+    margin: 20px auto !important; /* Centrado automático */
+    left: 0;                  /* Aseguramos que no tenga desfase lateral */
+    right: 0;
     display: block !important; 
     width: 100% !important;   /* Que use todo el ancho disponible */
     height: 520px !important;  /* Altura fija necesaria para el cover */
-    margin: 0px auto !important;
     position: relative;        /* Para que el form-cover se pegue a ella */
   }
 
  .form-cover {
-    width: 100%;
+
+    width: 100% !important;
+    left: 0 !important;       /* Forzamos a que empiece en el borde 0 del padre */
+    padding: 20px !important;
+    box-sizing: border-box;   /* Crucial para que el padding no ensanche el cover */
     height: 100%;
     position: absolute;
     top: 0;
