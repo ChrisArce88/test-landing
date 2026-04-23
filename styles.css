@@ -279,7 +279,7 @@ iframe {
     padding: 20px;
   }
 
-  .hero-right img {
+  .hero-left img {
         max-width: 100px;
         height: auto; /* Evita que se estire */
         object-fit: contain;
