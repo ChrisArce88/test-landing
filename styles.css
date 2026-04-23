@@ -90,7 +90,7 @@ body::before {
 
 .maintitle {
   text-align: center;
-  padding: 30px 30px 0px 30px;
+  padding: 20px 30px 0px 30px;
   margin: 0px 0;
   line-height: 1;
   display: block;
@@ -100,8 +100,8 @@ h1 {
   font-size: 48px;
   text-align: center;
   line-height: 1;
-	padding:0;
-	margin: 0px 0 0px 0;
+	padding:0px;
+	margin: 0px 10px 20px 10px;
 	color:#085127;
 }
 
@@ -273,12 +273,15 @@ iframe {
     flex-direction: column;
     grid-template-columns: 1fr; /* Reset del grid */
     min-height: auto;
-    padding: 0;
+    padding: 10px;
   }
 
   .hero-right {
-        padding: 10px 20px; /* Espacio para respirar en los lados */
-    }
+    display: block !important; /* Cambiamos de flex a block para evitar colapsos */
+    width: 100% !important;
+    padding: 40px !important;
+    box-sizing: border-box;
+  }
 
   .hero-left {
     padding: 20px !important; /* Forzamos el reset del padding lateral */
@@ -289,20 +292,31 @@ iframe {
   }
 
   .hero-left img {
-        max-width: 80%; /* Logo más manejable en móvil */
+        max-width: 60%; /* Logo más manejable en móvil */
         height: auto; /* Evita que se estire */
         object-fit: contain;
+        padding:0;
+        margin:0;
     }
 
-  .form-card {
-    height: 500px; /* IMPORTANTE: Altura fija para que el cover NO sea una línea */
-    width: 100%;
-    margin: 0 auto;
-    display: block; /* Asegura el comportamiento de bloque */
+.form-card {
+    display: block !important; 
+    width: 100% !important;   /* Que use todo el ancho disponible */
+    height: 520px !important;  /* Altura fija necesaria para el cover */
+    margin: 0px auto !important;
+    position: relative;        /* Para que el form-cover se pegue a ella */
   }
 
-  .form-cover {
-    padding: 15px;
+ .form-cover {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   .form-cover h2 {
@@ -315,7 +329,7 @@ iframe {
   }
 
   h1 {
-    font-size: 32px; /* Título principal más pequeño */
+    font-size: 38px; /* Título principal más pequeño */
     padding: 10px;
   }
 
@@ -324,8 +338,8 @@ iframe {
   }
 
   .end {
-    margin: 20px 0;
-    padding: 10px;
+    margin: 0px 0;
+    padding: 0px 80px;
   }
 
   .logo {
@@ -334,12 +348,12 @@ iframe {
 
   .navbar {
     justify-content: center;
-    padding: 20px;
+    padding: 30px;
   }
 
   .nav-links a {
     margin: 0 10px;
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 
