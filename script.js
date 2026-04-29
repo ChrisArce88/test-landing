@@ -63,31 +63,47 @@ if (startBtn && cover && container) {
   // GA TRACKING
   // =========================
 
-// Escuchamos en el document para que no importe CUÁNDO cargan los botones
-document.addEventListener('click', function(e) {
-    // 1. Buscamos el botón más cercano al clic
-    const btn = e.target.closest('.track-call');
+/**
+ * SISTEMA DE TRACKING DE LLAMADAS - GA4
+ * ------------------------------------
+ * Este script utiliza delegación de eventos en fase de captura para asegurar 
+ * que el tracking ocurra antes de que cualquier otro script bloquee el clic.
+ */
 
-    // Si no hay botón, no hacemos nada
-    if (!btn) return;
+(function() {
+    // 1. Verificamos que el DOM esté listo o escuchamos desde el nivel más alto
+    document.addEventListener('click', function(event) {
+        
+        // 2. Usamos .closest() para encontrar el botón aunque el usuario 
+        // haga clic en el icono ✆ o en el texto interno.
+        const callBtn = event.target.closest('.track-call');
 
-    // 2. Extraemos el label específicamente de ESE botón
-    const label = btn.getAttribute('data-label') || btn.dataset.label;
-    
-    // 3. LOG DE CONTROL (Esto DEBE aparecer si el clic llega)
-    console.log('%c EVENTO DETECTADO ', 'background: #222; color: #bada55', 'Ubicación:', label);
+        // Si el elemento clickeado no tiene la clase .track-call, ignoramos el clic
+        if (!callBtn) return;
 
-    // 4. Envío a GA4
-    if (typeof gtag === 'function') {
-        gtag('event', 'click_to_call', {
-            'event_label': label,
-            'event_category': 'contact',
-            'transport_type': 'beacon'
-        });
-    } else {
-        console.warn('Cuidado: gtag no está definido. Revisa el script de Google Analytics.');
-    }
-}, true); // El 'true' activa la fase de captura, ganándole a otros scripts
+        // 3. Obtenemos el label (navbar, btncontacto, etc.)
+        const label = callBtn.dataset.label || 'sin_etiqueta';
+
+        // 4. LOG DE DEPURACIÓN (Aparecerá en tu consola con estilo)
+        console.log(
+            `%c[GA4 Tracking]%c Evento: click_to_call | Ubicación: ${label}`, 
+            "color: white; background: #2196F3; font-weight: bold; padding: 2px 5px; border-radius: 3px;",
+            "color: #2196F3; font-weight: bold;"
+        );
+
+        // 5. Envío de datos a Google Analytics 4
+        if (typeof gtag === 'function') {
+            gtag('event', 'click_to_call', {
+                'event_category': 'contact',
+                'event_label': label, // Esto identifica si fue navbar o contacto
+                'transport_type': 'beacon' // Envía el hit incluso si se abre la app de llamadas
+            });
+        } else {
+            console.warn('Google Analytics (gtag) no está cargado aún.');
+        }
+
+    }, true); // El 'true' activa la FASE DE CAPTURA (Prioridad máxima)
+})();
 
   // =========================
 // FORM HANDLING
