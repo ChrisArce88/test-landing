@@ -68,13 +68,17 @@ const callButtons = document.querySelectorAll('.track-call');
 
 callButtons.forEach(btn => {
   btn.addEventListener('click', () => {
+
+    const label = btn.dataset.label || 'unknown';
+
     if (typeof gtag === 'function') {
       gtag('event', 'click_to_call', {
         event_category: 'contact',
-        event_label: 'phone_click',
+        event_label: label,
         value: 1
       });
     }
+
   });
 });
 
