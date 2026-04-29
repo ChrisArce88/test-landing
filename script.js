@@ -64,24 +64,24 @@ if (startBtn && cover && container) {
   // =========================
 
 
-const callButtons = document.querySelectorAll('.track-call');
+// Archivo Global: tracking.js
+document.addEventListener('click', (e) => {
+    // Buscamos si el clic fue en un elemento con la clase .track-call
+    // o si el elemento clickeado está DENTRO de algo con esa clase
+    const btn = e.target.closest('.track-call');
 
-callButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-
-    const label = btn.dataset.label || 'unknown';
-
-    console.log('CLICK:', label);
-
-    if (typeof gtag === 'function') {
-      gtag('event', 'click_to_call', {
-        event_category: 'contact',
-        event_label: label,
-        value: 1
-      });
+    if (btn) {
+        const label = btn.dataset.label || 'unknown';
+        
+        if (typeof gtag === 'function') {
+            gtag('event', 'click_to_call', {
+                'event_category': 'contact',
+                'event_label': label,
+                'transport_type': 'beacon'
+            });
+            console.log('GA Tracked:', label);
+        }
     }
-
-  });
 });
 
   // =========================
