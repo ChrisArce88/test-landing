@@ -71,6 +71,8 @@ callButtons.forEach(btn => {
 
     const label = btn.dataset.label || 'unknown';
 
+    console.log('CLICK:', label);
+
     if (typeof gtag === 'function') {
       gtag('event', 'click_to_call', {
         event_category: 'contact',
