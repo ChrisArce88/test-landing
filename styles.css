@@ -482,6 +482,10 @@ iframe {
   margin:20px;
 }
 
+.track-call * {
+  pointer-events: none;
+}
+
 .btn-primary.big {
   display: block;
   font-size: 28px;
