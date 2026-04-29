@@ -60,26 +60,23 @@ if (startBtn && cover && container) {
   }
 
   // =========================
-  // FORM HANDLING
-  // =========================
-  const form = document.getElementById('contactForm');
-  const btn = document.getElementById('submitBtn');
-  const successMsg = document.getElementById('formSuccess');
+// FORM HANDLING
+// =========================
+const form = document.getElementById('contactForm');
+const btn = document.getElementById('submitBtn');
+const successMsg = document.getElementById('formSuccess');
 
 if (form) {
-  form.addEventListener('submit', async (e) => {
-    ...
-  });
-}
-
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     // UI loading
-    btn.classList.add('loading');
-    btn.querySelector('.btn-text').style.display = 'none';
-    btn.querySelector('.btn-loading').style.display = 'inline';
-    btn.disabled = true;
+    if (btn) {
+      btn.classList.add('loading');
+      btn.querySelector('.btn-text').style.display = 'none';
+      btn.querySelector('.btn-loading').style.display = 'inline';
+      btn.disabled = true;
+    }
 
     const formData = new FormData(form);
 
@@ -90,8 +87,8 @@ if (form) {
         mode: 'no-cors'
       });
 
-      // Mostrar éxito
       form.style.display = 'none';
+
       if (successMsg) {
         successMsg.style.display = 'block';
         successMsg.scrollIntoView({ behavior: 'smooth' });
@@ -107,8 +104,9 @@ if (form) {
 
     } catch (error) {
       alert('Algo falló, intenta de nuevo');
-      btn.disabled = false;
+      if (btn) btn.disabled = false;
     }
   });
+}
 
 });
