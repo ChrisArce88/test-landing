@@ -63,27 +63,31 @@ if (startBtn && cover && container) {
   // GA TRACKING
   // =========================
 
-
-document.addEventListener('click', (e) => {
-    // Buscamos el ancestro más cercano con la clase .track-call
+// Escuchamos en el document para que no importe CUÁNDO cargan los botones
+document.addEventListener('click', function(e) {
+    // 1. Buscamos el botón más cercano al clic
     const btn = e.target.closest('.track-call');
 
-    // IMPORTANTE: Verificamos que el botón exista ANTES de pedirle el label
-    if (btn) {
-        // Extraemos el label directamente del botón que recibió el clic
-        const label = btn.getAttribute('data-label') || btn.dataset.label;
-        
-        console.log('BOTÓN DETECTADO:', label);
+    // Si no hay botón, no hacemos nada
+    if (!btn) return;
 
-        if (typeof gtag === 'function') {
-            gtag('event', 'click_to_call', {
-                'event_label': label, // Aquí se envía el label dinámico
-                'event_category': 'contact',
-                'transport_type': 'beacon'
-            });
-        }
+    // 2. Extraemos el label específicamente de ESE botón
+    const label = btn.getAttribute('data-label') || btn.dataset.label;
+    
+    // 3. LOG DE CONTROL (Esto DEBE aparecer si el clic llega)
+    console.log('%c EVENTO DETECTADO ', 'background: #222; color: #bada55', 'Ubicación:', label);
+
+    // 4. Envío a GA4
+    if (typeof gtag === 'function') {
+        gtag('event', 'click_to_call', {
+            'event_label': label,
+            'event_category': 'contact',
+            'transport_type': 'beacon'
+        });
+    } else {
+        console.warn('Cuidado: gtag no está definido. Revisa el script de Google Analytics.');
     }
-});
+}, true); // El 'true' activa la fase de captura, ganándole a otros scripts
 
   // =========================
 // FORM HANDLING
