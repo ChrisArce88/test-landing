@@ -1,38 +1,76 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const btn = document.getElementById("startFormBtn");
-    const cover = document.getElementById("formCover");
-    const container = document.getElementById('form-container');
 
-    btn.addEventListener("click", () => {
-        // 1. Desaparecer la portada
-        cover.style.opacity = "0";
-        cover.style.pointerEvents = "none";
+  // =========================
+  // REVEAL ANIMATION
+  // =========================
+  const items = document.querySelectorAll('.kadence-reveal');
 
-        // 2. Ejecutar la carga del formulario
-        loadForm();
-    });
+  if (!('IntersectionObserver' in window)) {
+    items.forEach(el => el.classList.add('is-visible'));
+  } else {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
 
-    function loadForm() {
-        // Limpiamos el contenedor por si acaso
-        container.innerHTML = '';
-        
-        const params = new URLSearchParams(window.location.search);
-        const partner = params.get('partner') || '';
-        const locationParam = params.get('location') || '';
+    items.forEach(el => observer.observe(el));
+  }
 
-        const baseFormUrl = 'https://forms.zohopublic.com/aldobettoni/form/MultiLocationFormTEST/formperma/FzWNb1lmOhqpaKpZGn35vKY4Xk-iFLnUczhBIjXRHTU';
-        const finalUrl = `${baseFormUrl}?partner=${encodeURIComponent(partner)}&location=${encodeURIComponent(locationParam)}`;
+  // =========================
+  // FORM HANDLING
+  // =========================
+  const form = document.getElementById('contactForm');
+  const btn = document.getElementById('submitBtn');
+  const successMsg = document.getElementById('formSuccess');
 
-        const iframe = document.createElement('iframe');
-        iframe.src = finalUrl;
-        iframe.style.width = "100%";
-        iframe.style.height = "520px"; // Ajustado para evitar cortes
-        iframe.style.border = "none";
-        // HACK: Subimos el iframe para compensar el margen de Zoho
-        iframe.style.marginTop = "-45px"; 
-        iframe.style.height = window.innerWidth < 768 ? "550px" : "520px";
-        
-        iframe.setAttribute('aria-label', 'Multi Location Form TEST');
-        container.appendChild(iframe);
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // UI loading
+    btn.classList.add('loading');
+    btn.querySelector('.btn-text').style.display = 'none';
+    btn.querySelector('.btn-loading').style.display = 'inline';
+    btn.disabled = true;
+
+    const formData = new FormData(form);
+
+    try {
+      await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors'
+      });
+
+      // Mostrar éxito
+      form.style.display = 'none';
+      if (successMsg) {
+        successMsg.style.display = 'block';
+        successMsg.scrollIntoView({ behavior: 'smooth' });
+      }
+
+      // Tracking
+      if (typeof gtag === 'function') {
+        gtag('event', 'form_submit', {
+          event_category: 'contact',
+          event_label: 'zoho_form'
+        });
+      }
+
+    } catch (error) {
+      alert('Algo falló, intenta de nuevo');
+      btn.disabled = false;
     }
+  });
+
+  gtag('event', 'conversion', {
+  event_category: 'lead',
+  event_label: 'zoho_success'
+});
+
 });
