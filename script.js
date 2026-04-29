@@ -1,6 +1,45 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // =========================
+// FORM COVER (INDEX HERO)
+// =========================
+const startBtn = document.getElementById("startFormBtn");
+const cover = document.getElementById("formCover");
+const container = document.getElementById('form-container');
+
+if (startBtn && cover && container) {
+
+  startBtn.addEventListener("click", () => {
+    // Fade out cover
+    cover.style.opacity = "0";
+    cover.style.pointerEvents = "none";
+
+    loadForm();
+  });
+
+  function loadForm() {
+    container.innerHTML = '';
+
+    const params = new URLSearchParams(window.location.search);
+    const partner = params.get('partner') || '';
+    const locationParam = params.get('location') || '';
+
+    const baseFormUrl = 'https://forms.zohopublic.com/aldobettoni/form/MultiLocationFormTEST/formperma/FzWNb1lmOhqpaKpZGn35vKY4Xk-iFLnUczhBIjXRHTU';
+
+    const finalUrl = `${baseFormUrl}?partner=${encodeURIComponent(partner)}&location=${encodeURIComponent(locationParam)}`;
+
+    const iframe = document.createElement('iframe');
+    iframe.src = finalUrl;
+    iframe.style.width = "100%";
+    iframe.style.height = window.innerWidth < 768 ? "550px" : "520px";
+    iframe.style.border = "none";
+    iframe.style.marginTop = "-45px";
+
+    container.appendChild(iframe);
+  }
+}
+
+  // =========================
   // REVEAL ANIMATION
   // =========================
   const items = document.querySelectorAll('.kadence-reveal');
@@ -27,7 +66,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const btn = document.getElementById('submitBtn');
   const successMsg = document.getElementById('formSuccess');
 
-  if (!form) return;
+if (form) {
+  form.addEventListener('submit', async (e) => {
+    ...
+  });
+}
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -67,10 +110,5 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.disabled = false;
     }
   });
-
-  gtag('event', 'conversion', {
-  event_category: 'lead',
-  event_label: 'zoho_success'
-});
 
 });
