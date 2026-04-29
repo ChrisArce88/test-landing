@@ -64,22 +64,23 @@ if (startBtn && cover && container) {
   // =========================
 
 
-// Archivo Global: tracking.js
 document.addEventListener('click', (e) => {
-    // Buscamos si el clic fue en un elemento con la clase .track-call
-    // o si el elemento clickeado está DENTRO de algo con esa clase
+    // Buscamos el ancestro más cercano con la clase .track-call
     const btn = e.target.closest('.track-call');
 
+    // IMPORTANTE: Verificamos que el botón exista ANTES de pedirle el label
     if (btn) {
-        const label = btn.dataset.label || 'unknown';
+        // Extraemos el label directamente del botón que recibió el clic
+        const label = btn.getAttribute('data-label') || btn.dataset.label;
         
+        console.log('BOTÓN DETECTADO:', label);
+
         if (typeof gtag === 'function') {
             gtag('event', 'click_to_call', {
+                'event_label': label, // Aquí se envía el label dinámico
                 'event_category': 'contact',
-                'event_label': label,
                 'transport_type': 'beacon'
             });
-            console.log('GA Tracked:', label);
         }
     }
 });
