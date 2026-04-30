@@ -123,49 +123,21 @@ if (!('IntersectionObserver' in window)) {
 // FORM HANDLING
 // =========================
 const form = document.getElementById('contactForm');
-const btn = document.getElementById('submitBtn');
-const successMsg = document.getElementById('formSuccess');
 
 if (form) {
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+  form.addEventListener('submit', () => {
 
-    // UI loading
-    if (btn) {
-      btn.classList.add('loading');
-      btn.querySelector('.btn-text').style.display = 'none';
-      btn.querySelector('.btn-loading').style.display = 'inline';
-      btn.disabled = true;
-    }
-
-    const formData = new FormData(form);
-
-    try {
-      await fetch(form.action, {
-        method: 'POST',
-        body: formData,
-        mode: 'no-cors'
+    // tracking opcional
+    if (typeof gtag === 'function') {
+      gtag('event', 'form_submit', {
+        event_category: 'contact',
+        event_label: 'zoho_form'
       });
-
-      form.style.display = 'none';
-
-      if (successMsg) {
-        successMsg.style.display = 'block';
-        successMsg.scrollIntoView({ behavior: 'smooth' });
-      }
-
-      // Tracking
-      if (typeof gtag === 'function') {
-        gtag('event', 'form_submit', {
-          event_category: 'contact',
-          event_label: 'zoho_form'
-        });
-      }
-
-    } catch (error) {
-      alert('Algo falló, intenta de nuevo');
-      if (btn) btn.disabled = false;
     }
+
+    // NO preventDefault
+    // NO fetch
+    // Zoho se encarga del redirect automáticamente
   });
 }
 
