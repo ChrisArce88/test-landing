@@ -118,7 +118,7 @@ body::after {
 
 .maintitle {
   text-align: center;
-  padding: 30px 30px 0px 30px;
+  padding: 20px 30px 0px 30px;
   margin: 0px 0;
   line-height: 1;
   display: block;
@@ -250,6 +250,27 @@ iframe {
 }
 
 /* PORTADA */
+
+.coinicon {
+  max-width:120px;
+  margin: 10px auto;
+  justify-content: center;
+  display: inline-block;
+  animation: floatCoin 3s ease-in-out infinite;
+}
+
+@keyframes floatCoin {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
 .form-cover {
   position: absolute;
     inset: 0; /* Cubre todo el padre */
@@ -321,7 +342,7 @@ iframe {
     padding: 20px;
     text-align: center;
     max-width: 700px;
-    margin: 0 auto 40px auto; /* Reducimos margen superior */
+    margin: 10px auto 40px auto; /* Reducimos margen superior */
     top:-15px;
     background: transparent; /* Vital para que se vea el fondo del body */
     box-sizing: border-box;
@@ -341,11 +362,37 @@ iframe {
   transform: translateY(24px);
   transition: opacity 0.6s ease, transform 0.6s ease;
   will-change: opacity, transform;
+
+  
 }
 
 .kadence-reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+.cta-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.cta-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.btn-primary.big.cta-reveal {
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+}
+
+.btn-primary.big.cta-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: 
+    opacity 0.6s ease,
+    transform 0.6s cubic-bezier(.2,.8,.2,1);
 }
 
 /* ---------------------- */
@@ -405,67 +452,7 @@ iframe {
   transform: rotate(45deg);
 }
 
-/* ---------------------- */
-/* CHARACTER CTA - GENERAL (desktop) */
-.character-wrap {
-  position: relative;
-  max-width: 500px;
-  margin: 0 auto;
-  display: block;
-  line-height: 0;
-  font-size: 0;
-}
-.character-wrap img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.character-shift {
-  margin-top: 80px;
-  margin-left: auto;
-  margin-right: 25%;
-  transform: translateX(40px);
-}
-.speech-text {
-  position: absolute;
-  top: 18%;
-  left: 7%;
-  width: 38%;
-  text-align: center;
-  color: #2b2b2b;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
-  line-height: 1.2;
-  font-weight: 500;
-}
-.speech-text span {
-  color: #ef4036;
-  font-weight: 700;
-}
-.character-cta {
-  position: absolute;
-  bottom: 10%;
-  right: 10%;
-  font-size: 16px;
-  line-height: 1.2;
-  background-color: #ef4036;
-  color: #ffffff;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  padding: 16px 44px;
-  border-radius: 6px;
-  text-decoration: none;
-  transition: background-color 0.25s ease;
-}
-.character-cta:hover {
-  background-color: #e52015;
-}
 
-.character-cta:focus,
-.character-cta:focus-visible {
-  color: #ffffff;
-  outline: none;
-}
 
 .icon {
   max-width:120px;
@@ -479,7 +466,7 @@ iframe {
 }
 
 .headline{
-  margin:20px;
+  margin:0px;
 }
 
 .track-call * {
@@ -490,18 +477,25 @@ iframe {
   display: block;
   font-size: 28px;
   width: 40%;
-  border-radius: 12px;
-  text-decoration: none;
-  color:#131313;
-  margin:30px auto;
-  background: #7ac621;
+  margin: 15px auto;
   padding: 10px 18px;
   border-radius: 32px;
+
+  background: #7ac621;
+  color:#131313;
+  text-decoration: none;
+
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+
+  /* 👇 SOLO lo que necesitas */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-primary.big:hover {
   background: #98f42d;
   color:#1a1a1a;
+  transform: scale(1.02);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
 }
 
 .btn-secondary{
@@ -516,6 +510,12 @@ iframe {
 
 .microcopy{
   margin:10px;
+}
+
+.contactpic {
+  max-width:230px;
+  margin: 0;
+  padding:0;
 }
 
 .contact-form {
@@ -541,6 +541,10 @@ iframe {
 }
 
 .contact-form button {
+  position: relative;
+  overflow: hidden;
+
+  margin: 10px 0;
   background: linear-gradient(135deg, #fcdb37, #f1b416);
   border: none;
   padding: 18px;
@@ -548,13 +552,31 @@ iframe {
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
-  transition: 0.2s ease;
-  position: relative;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
-.contact-form button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+.contact-form button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.3),
+    transparent
+  );
+
+  transform: skewX(-20deg);
+}
+
+.contact-form button:hover::after {
+  left: 125%;
+  transition: left 0.9s ease;
 }
 
 .btn-loading {
@@ -567,12 +589,12 @@ iframe {
 
 .contact-section {
   max-width: 700px;
-  margin: 40px auto;
+  margin: 20px auto;
   text-align: center;
 }
 
 .trust{
-  margin:30px;
+  margin:10px;
 }
 
 .trust span{
@@ -819,3 +841,24 @@ iframe {
     display: block;
   }
 
+  .btn-primary.big{
+    border-radius: 28px;
+    font-size: 24px;
+    width:60%;
+    box-sizing: border-box;
+  }
+
+  .contact-section{
+    margin: 5px 35px 35px 35px;
+  }
+
+  .contactpic {
+   margin:0;
+   padding:0;
+  }
+
+  h2{
+    margin:0;
+    padding:0;
+    font-size: 32px;
+  }
