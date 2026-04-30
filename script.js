@@ -40,24 +40,38 @@ if (startBtn && cover && container) {
 }
 
   // =========================
-  // REVEAL ANIMATION
-  // =========================
-  const items = document.querySelectorAll('.kadence-reveal');
+// REVEAL ANIMATION
+// =========================
+const items = document.querySelectorAll('.kadence-reveal');
+const ctas = document.querySelectorAll('.cta-reveal');
 
-  if (!('IntersectionObserver' in window)) {
-    items.forEach(el => el.classList.add('is-visible'));
-  } else {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
+if (!('IntersectionObserver' in window)) {
 
-    items.forEach(el => observer.observe(el));
-  }
+  // fallback: mostrar todo sin animación
+  items.forEach(el => el.classList.add('is-visible'));
+  ctas.forEach(el => el.classList.add('is-visible'));
+
+} else {
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.15 });
+
+  // elementos normales
+  items.forEach(el => observer.observe(el));
+
+  // CTAs con delay
+  ctas.forEach((el, index) => {
+    el.style.transitionDelay = `${index * 120}ms`;
+    observer.observe(el);
+  });
+
+}
 
   // =========================
   // GA TRACKING
